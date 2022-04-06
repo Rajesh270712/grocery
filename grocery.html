@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+     font-weight: bold;
+     background-color: bisque;
+     text-align: center;
+        }
+        h2{
+            color: rgb(246, 181, 102);
+        }
+        #container{
+            width: 20%;
+            height: 300px;
+            display: flex;
+     margin: auto;
+     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+     
+        }
+        table{
+            color: black;
+            margin: auto;
+            margin-top: 100px;
+        }
+        #container>form{
+            display: grid;
+           line-height: 30px;
+           margin: auto;
+            margin-top: 40px;
+        }
+        #container>form>sub:hover{
+         padding: 10px 50px 10px 20px;
+         cursor: pointer;
+         border-radius: 12px;
+         background-color: aquamarine;
+        }
+        /* #container>form>div{
+      
+        } */
+    </style>
+</head>
+<body>
+    <h2>Grocery List</h2>
+    <div id="container">
+        <form action="">
+            <div >
+                <label>Product :</label>
+                <input type="text" id="name" name="name" placeholder="Product">
+            </div>
+            <br>
+            <div>
+                <label>Quantity :</label>
+                <input type="text" id="quantity" name="name" placeholder="Quantity"> 
+            </div>
+            <br>
+            <div>
+                <label>Pririoty :</label>
+                <select name="pririoty" id="pririoty" style="padding: 2px 45px 2px 45px;">
+                    <option value="select">Select</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <br>
+                <div id="sub">
+                    <input type="submit" id="mohit" style="padding: 2px 45px 2px 45px;">
+                </div>
+    </form>
+    <br>
+    
+    </div>
+    <table border="1" id="table">
+        <tr>
+            <td>S No</td>
+            <td>Product</td>
+            <td>Quantity</td>
+            <td>pririoty</td>
+            <td>Status</td>
+            <td>Action</td>
+        </tr>
+    </table>
+   <script>
+     var foram = document.querySelector('form');
+     foram.addEventListener('submit', addItem);
+     var tables = document.querySelector('table');
+     var items = JSON.parse(localStorage.getItem(item)) || [];
+     
+     showprev();
+
+     function showprev()
+     {
+         var na
+     }
+     
+     function addItem(event){
+     event.preventDefault();
+
+     var name = document.getElementById('name').value;
+     var quantity = document.getElementById('quantity').value;
+     var priroty = document.getElementById('pririoty').value;
+   
+   
+    //  console.log(name,quantity,priroty)
+    // console.log(priroty)
+     addinto(name,quantity,priroty);
+
+         items.push({name: name, quantity: quantity, pririoty: priroty}); 
+         localStorage.setItem("item",JSON.stringify(items));
+
+    //    document.getElementById('name').value = "";
+    //    document.getElementById('quantity').value="";
+    //    document.getElementById('pririoty').value = "select";
+     }
+    
+    
+    
+     function addinto(name,quantity,priroty){
+         if(name.length>0){
+         var m = document.createElement('tr');
+         var m1 = document.createElement('td');
+         m1.textContent = items.length+1;
+         var m2 = document.createElement('td');
+         m2.textContent = name;
+         var m3 = document.createElement('td');
+         m3.textContent = quantity;
+         var m4 = document.createElement('td');
+         m4.textContent = priroty;
+         var m5 = document.createElement('td');
+         m5.textContent = "Pending";
+         m5.addEventListener('click',markCompleate);
+         var m6 = document.createElement('td');
+         m6.textContent = "Dleate";
+        //  m6.addEventListener('click', deleteItem());
+       
+       
+       
+         m.append(m1,m2,m3,m4,m5,m6);
+        //  tables.append(m);
+        document.querySelector("table").append(m)
+
+         
+     }
+    }
+   
+     function markCompleate(e){
+         if(e.target.textContent =='Pending'){
+            e.target.textContent = "Completed"
+            e.target.style.cursor = "pointer"
+            e.target.style.backgroundColor = 'green'
+         }else{
+            e.target.textContent ='Pending'
+         }
+        
+        
+     }
+     function deleteItem(e){
+      // e.target.textContent = deleteItem
+     }
+
+
+   </script>
+</body>
+</html>
